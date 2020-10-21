@@ -28,8 +28,8 @@
  </Memory4>
  <Project>
   <ProjectSessionItem path="helloworldwallet"/>
-  <ProjectSessionItem path="helloworldwallet;helloworldwallet"/>
-  <ProjectSessionItem path="helloworldwallet;helloworldwallet;Script Files"/>
+  <ProjectSessionItem path="helloworldwallet;ble_app"/>
+  <ProjectSessionItem path="helloworldwallet;ble_secure_bootloader_v100"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="bootloader_ble" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -70,5 +70,5 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files/>
- <ARMCrossStudioWindow activeProject="helloworldwallet" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/Users/gecko/project/nrf52/helloword_bootloader/153/config" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="ble_app" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/Users/gecko/project/nrf52/helloword_bootloader/153/config" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

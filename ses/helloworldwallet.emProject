@@ -1,11 +1,6 @@
 <!DOCTYPE CrossStudio_Project_File>
 <solution Name="helloworldwallet" target="8" version="2">
   <configuration
-    Name="Debug"
-    c_preprocessor_definitions="DEBUG"
-    gcc_debugging_level="Level 3"
-    gcc_optimization_level="None" />
-  <configuration
     Name="Release"
     c_preprocessor_definitions="NDEBUG"
     gcc_debugging_level="Level 4"
@@ -13,86 +8,370 @@
     gcc_optimization_level="Level 2 balanced" />
   <configuration
     Name="Debug"
+    build_intermediate_directory="$(SolutionDir)/Output/$(Configuration)/Obj/$(ProjectName)"
+    build_output_directory="$(SolutionDir)/Output/$(Configuration)/Exe"
     c_preprocessor_definitions="DEBUG"
     gcc_debugging_level="Level 3"
     gcc_optimization_level="Level 3" />
   <project Name="ble_app">
     <configuration
-      CMSIS_CORE="Yes"
       Name="Common"
-      Placement="Flash"
-      Target="nRF52840_xxAA"
       arm_architecture="v7EM"
-      arm_compiler_variant="SEGGER"
       arm_core_type="Cortex-M4"
       arm_endian="Little"
       arm_fp_abi="Hard"
       arm_fpu_type="FPv4-SP-D16"
-      arm_interwork="No"
-      arm_linker_heap_size="16384"
+      arm_linker_heap_size="8192"
       arm_linker_process_stack_size="0"
       arm_linker_stack_size="16384"
-      arm_linker_variant="SEGGER"
-      arm_simulator_memory_simulation_parameter="ROM1;0x00000000;0x00100000;RAM1;0x00800000;0x00040000;RAM2;0x20000000;0x00040000;"
-      arm_target_debug_interface_type="ADIv5"
+      arm_linker_treat_warnings_as_errors="No"
+      arm_simulator_memory_simulation_parameter="RWX 00000000,00100000,FFFFFFFF;RWX 20000000,00010000,CDCDCDCD"
       arm_target_device_name="nRF52840_xxAA"
       arm_target_interface_type="SWD"
-      c_preprocessor_definitions="NRF52840_XXAA;__nRF_FAMILY;ARM_MATH_CM4;FLASH_PLACEMENT=1"
-      c_user_include_directories="$(ProjectDir)/nRF/Device/Include"
-      debug_register_definition_file="$(ProjectDir)/nrf52840.svd"
+      c_preprocessor_definitions="FLOAT_ABI_HARD;FREERTOS;INITIALIZE_USER_SECTIONS;NO_VTOR_CONFIG;NRF52840_XXAA;NRF_SD_BLE_API_VERSION=6;S140;SOFTDEVICE_PRESENT;PB_FIELD_32BIT;RAND_PLATFORM_INDEPENDENT;USE_ETHEREUM ;SES"
+      c_user_include_directories="$(ProjectDir)/config;$(ProjectDir)/src/firmware;$(ProjectDir)/../thirdparty;$(ProjectDir)/include;$(ProjectDir)/include/transport;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nano-pb;$(ProjectDir)/../thirdparty/trezor-crypto;$(ProjectDir)/../thirdparty/trezor-crypto/aes;$(ProjectDir)/../thirdparty/trezor-crypto/chacha20poly1305;$(ProjectDir)/../thirdparty/trezor-cryptoed25519-donna;$(ProjectDir)/../thirdparty/trezor-crypto/monero;/Users/gecko/ARMSDK/nRF52/15_2_0/components;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_advertising;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_link_ctx_manager;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_dtm;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_racp;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_bas;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_dfu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_dis;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_ias;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_lbs;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_lls;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_rscs;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_rscs_c;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_tps;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/common;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/nrf_ble_gatt;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/nrf_ble_qwr;/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager;/Users/gecko/ARMSDK/nRF52/15_2_0/components/boards;/Users/gecko/ARMSDK/nRF52/15_2_0/components/drivers_nrf/usbd;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/stack_info;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic_fifo;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic_flags;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/balloc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader/ble_dfu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bsp;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/button;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/cli;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crc16;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crc32;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_hw;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_sw;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/mbedtls;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/micro_ecc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cifra;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310_bl;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/csense;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/csense_drv;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/delay;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/ecc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/experimental_section_vars;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/experimental_task_manager;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/fds;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/fstorage;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/gfx;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/gpiote;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/hardfault;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/hardfault/nrf52;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/hci;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/led_softblink;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/low_power_pwm;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mem_manager;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/memobj;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mpu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mutex;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/pwm;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/pwr_mgmt;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/queue;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/ringbuf;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/scheduler;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/sdcard;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/sensorsim;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/queue;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/slip;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/sortlist;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/spi_mngr;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/stack_guard;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/strerror;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/svc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/timer;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/twi_mngr;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/twi_sensor;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/audio;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/cdc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/cdc/acm;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/hid;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/hid/generic;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/msc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/conn_hand_parser;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/conn_hand_parser/ac_rec_parser;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/conn_hand_parser/ble_oob_advdata_parser;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/conn_hand_parser/le_oob_rec_parser;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/ac_rec;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/ble_oob_advdata;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/ble_pair_lib;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/ble_pair_msg;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/common;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/ep_oob_rec;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/hs_rec;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/connection_handover/le_oob_rec;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/generic/message;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/generic/record;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/launchapp;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/parser/message;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/parser/record;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/text;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/ndef/uri;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t2t_lib;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t2t_lib/hal_t2t;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t2t_parser;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t4t_lib;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t4t_lib/hal_t4t;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t4t_parser/apdu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t4t_parser/cc_file;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t4t_parser/hl_detection_procedure;/Users/gecko/ARMSDK/nRF52/15_2_0/components/nfc/t4t_parser/tlv;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/headers;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/headers/nrf52;/Users/gecko/ARMSDK/nRF52/15_2_0/components/toolchain/cmsis/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external;/Users/gecko/ARMSDK/nRF52/15_2_0/external/fprintf;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_cc310/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/config;/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/portable/CMSIS/nrf52;/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/portable/GCC/nrf52;/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/segger_rtt;/Users/gecko/ARMSDK/nRF52/15_2_0/external/utf_converter;/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx;/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/include;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/hal;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk"
+      debug_additional_load_file="/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/hex/s140_nrf52_6.1.0_softdevice.hex"
+      debug_register_definition_file="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk/nrf52840.svd"
       debug_start_from_entry_point_symbol="No"
       debug_target_connection="J-Link"
+      gcc_debugging_level="Level 3"
       gcc_entry_point="Reset_Handler"
-      link_linker_script_file="$(ProjectDir)/ses_nrf52840_xxaa.icf"
       linker_memory_map_file="$(ProjectDir)/nRF52840_xxAA_MemoryMap.xml"
+      linker_output_format="hex"
+      linker_printf_fmt_level="long"
+      linker_printf_width_precision_supported="Yes"
       linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
-      macros="NRFHeaderFile=$(PackagesDir)/nRF/Device/Include/nrf.h;DeviceHeaderFile=$(PackagesDir)/nRF/Device/Include/nrf52840.h;DeviceSystemFile=$(PackagesDir)/nRF/Device/Source/system_nrf52840.c;DeviceVectorsFile=$(PackagesDir)/nRF/Device/Startup/ses_startup_nrf52840.s;DeviceLinkerScript=$(PackagesDir)/nRF/Device/Linker/ses_nrf52840_xxaa.icf;DeviceMemoryMap=$(PackagesDir)/nRF/Device/MemoryMap/nRF52840_xxAA_MemoryMap.xml;DeviceLibraryIdentifier=M4lf;DeviceFamily=nRF;Target=nRF52840_xxAA;Placement=Flash"
-      package_dependencies="CMSIS-CORE_V5"
+      linker_section_placement_macros="FLASH_PH_START=0x0;FLASH_PH_SIZE=0xeb000;RAM_PH_START=0x20000000;RAM_PH_SIZE=0x40000;FLASH_START=0x26000;FLASH_SIZE=0xc5000;RAM_START=0x200057b8;RAM_SIZE=0x3a848;UICR_START=0x10001304;UICR_SIZE=0x4"
+      linker_section_placements_segments="FLASH RX 0x0 0xeb000;RAM RWX 0x20000000 0x40000;UICR RX 0x10001304 0x308"
+      macros="CMSIS_CONFIG_TOOL=/Users/gecko/ARMSDK/nRF52/15_2_0/external_tools/cmsisconfig/CMSIS_Configuration_Wizard.jar"
       project_directory="../ble_app"
       project_type="Executable"
-      target_reset_script="Reset();"
-      target_script_file="$(ProjectDir)/nRF_Target.js"
-      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
-    <folder Name="CMSIS Files">
-      <file file_name="nRF/Device/Include/nrf.h" />
-      <file file_name="nRF/Device/Include/nrf52840.h" />
-      <file file_name="nRF/Device/Source/system_nrf52840.c">
-        <configuration
-          Name="Common"
-          default_code_section=".init"
-          default_const_section=".init_rodata" />
-      </file>
+      speed="0" />
+    <folder Name="Segger Startup Files">
+      <file file_name="$(StudioDir)/source/thumb_crt0.s" />
     </folder>
-    <folder Name="RTT Files">
-      <file file_name="SEGGER_RTT.c" />
-      <file file_name="SEGGER_RTT.h" />
-      <file file_name="SEGGER_RTT_Conf.h" />
-      <file file_name="SEGGER_RTT_SES.c" />
+    <folder Name="nRF_Core">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mpu/nrf_mpu.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/stack_guard/nrf_stack_guard.c" />
     </folder>
-    <folder Name="Script Files">
-      <file file_name="nRF/Scripts/nRF_Target.js">
-        <configuration Name="Common" file_type="Reset Script" />
-      </file>
-      <file file_name="nRF/Device/Linker/ses_nrf52840_xxaa.icf">
-        <configuration Name="Common" file_type="Linker Script" />
-      </file>
-      <file file_name="nRF/Device/MemoryMap/nRF52840_xxAA_MemoryMap.xml">
-        <configuration Name="Common" file_type="Memory Map" />
-      </file>
+    <folder Name="nRF_Log">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src/nrf_log_backend_rtt.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src/nrf_log_backend_serial.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src/nrf_log_backend_uart.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src/nrf_log_default_backends.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src/nrf_log_frontend.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src/nrf_log_str_formatter.c" />
     </folder>
-    <folder Name="Source Files">
-      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
-      <file file_name="main.c" />
+    <folder Name="nRF_Libraries">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/button/app_button.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util/app_error.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util/app_error_handler_gcc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util/app_error_weak.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/timer/app_timer_freertos.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util/app_util_platform.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crc16/crc16.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/fds/fds.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/hardfault/nrf52/handler/hardfault_handler_gcc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/hardfault/hardfault_implementation.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util/nrf_assert.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic_fifo/nrf_atfifo.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic_flags/nrf_atflags.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic/nrf_atomic.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/balloc/nrf_balloc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/fprintf/nrf_fprintf.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/fprintf/nrf_fprintf_format.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/fstorage/nrf_fstorage.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/fstorage/nrf_fstorage_sd.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/memobj/nrf_memobj.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/ringbuf/nrf_ringbuf.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/experimental_section_vars/nrf_section_iter.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/strerror/nrf_strerror.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/sensorsim/sensorsim.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/queue/nrf_queue.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crc32/crc32.c" />
     </folder>
-    <folder Name="System Files">
-      <file file_name="SEGGER_THUMB_Startup.s" />
-      <file file_name="nRF/Device/Startup/ses_startup_nrf_common.s" />
-      <file file_name="nRF/Device/Startup/ses_startup_nrf52840.s">
-        <configuration Name="Common" file_type="Assembly" />
-      </file>
+    <folder Name="None">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk/ses_startup_nrf52840.s" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk/ses_startup_nrf_common.s" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk/system_nrf52840.c" />
     </folder>
-    <configuration Name="Debug" gcc_optimization_level="None" />
-    <configuration Name="Release" gcc_debugging_level="Level 2" />
+    <folder Name="FreeRTOS">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/croutine.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/event_groups.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/portable/MemMang/heap_1.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/list.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/portable/GCC/nrf52/port.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/portable/CMSIS/nrf52/port_cmsis.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/portable/CMSIS/nrf52/port_cmsis_systick.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/queue.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/stream_buffer.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/tasks.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/freertos/source/timers.c" />
+    </folder>
+    <folder Name="Board Definition">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/boards/boards.c" />
+    </folder>
+    <folder Name="nRF_Drivers">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy/nrf_drv_power.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy/nrf_drv_rng.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy/nrf_drv_clock.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy/nrf_drv_spi.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_clock.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_gpiote.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_power.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_rng.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_power_clock.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_saadc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_spim.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/prs/nrfx_prs.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_wdt.c" />
+    </folder>
+    <folder Name="Application">
+      <folder Name="driver">
+        <file file_name="$(ProjectDir)/src/driver/battery.c" />
+        <file file_name="$(ProjectDir)/src/driver/button.c" />
+        <file file_name="$(ProjectDir)/src/driver/display.c" />
+        <file file_name="$(ProjectDir)/src/driver/epd_wxx_hal.c" />
+        <file file_name="$(ProjectDir)/src/driver/soter_ble.c" />
+        <file file_name="$(ProjectDir)/src/driver/usb.c" />
+        <file file_name="$(ProjectDir)/src/driver/soter_service.c" />
+        <file file_name="$(ProjectDir)/src/driver/rng.c" />
+        <file file_name="$(ProjectDir)/src/driver/power.c" />
+        <file file_name="$(ProjectDir)/src/driver/epd_w21_c02.c" />
+        <file file_name="$(ProjectDir)/src/driver/gt24l24a2y_hal.c" />
+        <file file_name="$(ProjectDir)/src/driver/gt24l24a2y_app.c" />
+        <file file_name="$(ProjectDir)/src/driver/flash_fds.c" />
+      </folder>
+      <folder Name="transport">
+        <file file_name="$(ProjectDir)/src/transport/exchange.pb.c" />
+        <file file_name="$(ProjectDir)/src/transport/messages.pb.c" />
+        <file file_name="$(ProjectDir)/src/transport/types.pb.c" />
+      </folder>
+      <file file_name="$(ProjectDir)/src/main.c" />
+      <folder Name="board">
+        <file file_name="$(ProjectDir)/src/board/confirm_sm.c" />
+        <file file_name="$(ProjectDir)/src/board/draw.c" />
+        <file file_name="$(ProjectDir)/src/board/font.c" />
+        <file file_name="$(ProjectDir)/src/board/layout.c" />
+        <file file_name="$(ProjectDir)/src/board/memory.c" />
+        <file file_name="$(ProjectDir)/src/board/msg_dispatch.c" />
+        <file file_name="$(ProjectDir)/src/board/u2f.c" />
+        <file file_name="$(ProjectDir)/src/board/canvas.c" />
+        <file file_name="$(ProjectDir)/src/board/resources.c" />
+      </folder>
+      <folder Name="firmware">
+        <file file_name="$(ProjectDir)/src/firmware/app_confirm.c" />
+        <file file_name="$(ProjectDir)/src/firmware/app_layout.c" />
+        <file file_name="$(ProjectDir)/src/firmware/coins.c" />
+        <file file_name="$(ProjectDir)/src/firmware/crypto.c" />
+        <file file_name="$(ProjectDir)/src/firmware/ethereum.c" />
+        <file file_name="$(ProjectDir)/src/firmware/ethereum_tokens.c" />
+        <file file_name="$(ProjectDir)/src/firmware/exchange.c" />
+        <file file_name="$(ProjectDir)/src/firmware/fsm.c" />
+        <file file_name="$(ProjectDir)/src/firmware/passphrase_sm.c" />
+        <file file_name="$(ProjectDir)/src/firmware/pin_sm.c" />
+        <file file_name="$(ProjectDir)/src/firmware/policy.c" />
+        <file file_name="$(ProjectDir)/src/firmware/qr_encode.c" />
+        <file file_name="$(ProjectDir)/src/firmware/recovery.c" />
+        <file file_name="$(ProjectDir)/src/firmware/recovery_cipher.c" />
+        <file file_name="$(ProjectDir)/src/firmware/reset.c" />
+        <file file_name="$(ProjectDir)/src/firmware/signing.c" />
+        <file file_name="$(ProjectDir)/src/firmware/storage.c" />
+        <file file_name="$(ProjectDir)/src/firmware/transaction.c" />
+        <file file_name="$(ProjectDir)/src/firmware/util.c" />
+        <file file_name="$(ProjectDir)/src/firmware/u2f_user.c" />
+        <file file_name="$(ProjectDir)/src/firmware/fsm_msg_coin.h" />
+        <file file_name="$(ProjectDir)/src/firmware/fsm_msg_common.h" />
+        <file file_name="$(ProjectDir)/src/firmware/fsm_msg_crypto.h" />
+        <file file_name="$(ProjectDir)/src/firmware/fsm_msg_ethereum.h" />
+        <file file_name="$(ProjectDir)/src/firmware/utf8.c" />
+      </folder>
+    </folder>
+    <folder Name="nRF_Segger_RTT">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/segger_rtt/SEGGER_RTT.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/segger_rtt/SEGGER_RTT_Syscalls_SES.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/segger_rtt/SEGGER_RTT_printf.c" />
+    </folder>
+    <folder Name="nRF_BLE">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/auth_status_tracker.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/common/ble_advdata.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_advertising/ble_advertising.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/common/ble_conn_params.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/common/ble_conn_state.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/common/ble_srv_common.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/gatt_cache_manager.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/gatts_cache_manager.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/id_manager.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/nrf_ble_gatt/nrf_ble_gatt.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/nrf_ble_qwr/nrf_ble_qwr.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/peer_data_storage.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/peer_database.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/peer_id.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/peer_manager.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/peer_manager_handler.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/pm_buffer.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/security_dispatcher.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/security_manager.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_link_ctx_manager/ble_link_ctx_manager.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/peer_manager/nrf_ble_lesc.c" />
+    </folder>
+    <folder Name="nRF_USB">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/drivers_nrf/usbd/nrf_drv_usbd.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/app_usbd.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/app_usbd_core.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/hid/app_usbd_hid.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/class/hid/generic/app_usbd_hid_generic.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/app_usbd_string_desc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/usbd/app_usbd_serial_num.c" />
+    </folder>
+    <folder Name="nrf_cc310">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_cc310/lib/libnrf_cc310_0.9.10.a" />
+    </folder>
+    <folder Name="font_library">
+      <file file_name="$(ProjectDir)/../thirdparty/gt24l24a2y/gt24l24a2y_nrf52840_segger.a" />
+    </folder>
+    <folder Name="nRF_Crypto backend nRF HW">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_hw/nrf_hw_backend_init.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_hw/nrf_hw_backend_rng.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_hw/nrf_hw_backend_rng_mbedtls.c" />
+    </folder>
+    <folder Name="nRF_Crypto backend uECC">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/micro_ecc/micro_ecc_backend_ecc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/micro_ecc/micro_ecc_backend_ecdh.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/micro_ecc/micro_ecc_backend_ecdsa.c" />
+    </folder>
+    <folder Name="nRF_Oberon_Crypto">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_oberon/lib/nrf52/liboberon_2.0.5.a" />
+    </folder>
+    <folder Name="nRF_Crypto">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_aead.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_aes.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_aes_shared.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_ecc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_ecdh.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_ecdsa.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_eddsa.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_error.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_hash.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_hkdf.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_hmac.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_init.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_rng.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_shared.c" />
+    </folder>
+    <folder Name="nRF_Crypto backend CC310">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_aes.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_aes_aead.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_chacha_poly_aead.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_ecc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_ecdh.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_ecdsa.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_eddsa.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_hash.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_hmac.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_init.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_mutex.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_rng.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310/cc310_backend_shared.c" />
+    </folder>
+    <folder Name="nRF_Crypto backend Oberon">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon/oberon_backend_chacha_poly_aead.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon/oberon_backend_ecc.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon/oberon_backend_ecdh.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon/oberon_backend_ecdsa.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon/oberon_backend_eddsa.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon/oberon_backend_hash.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon/oberon_backend_hmac.c" />
+    </folder>
+    <folder Name="UTF8/UTF16 converter">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/utf_converter/utf.c" />
+    </folder>
+    <folder Name="nRF_BLE_Services">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_bas/ble_bas.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/ble_services/ble_dis/ble_dis.c" />
+    </folder>
+    <folder Name="nRF_SoftDevice">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common/nrf_sdh.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common/nrf_sdh_ble.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common/nrf_sdh_freertos.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common/nrf_sdh_soc.c" />
+    </folder>
+    <folder Name="Config">
+      <file file_name="$(ProjectDir)/include/FreeRTOSConfig.h" />
+      <file file_name="$(ProjectDir)/config/custom_board.h" />
+      <file file_name="$(ProjectDir)/config/sdk_config.h" />
+    </folder>
+    <folder Name="trezor-crypto">
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/address.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/base32.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/base58.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/bignum.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/bip32.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/bip39.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/blake256.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/blake2b.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/blake2s.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/cash_addr.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/curves.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ecdsa.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/groestl.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/hasher.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/hmac.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/memzero.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/nem.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/nist256p1.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/pbkdf2.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/rand.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/rc4.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ripemd160.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/script.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/secp256k1.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/segwit_addr.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/sha2.c" />
+      <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/sha3.c" />
+      <folder Name="aes">
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/aes/aes_modes.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/aes/aescrypt.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/aes/aeskey.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/aes/aestab.c" />
+      </folder>
+      <folder Name="ed25519-donna">
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/curve25519-donna-32bit.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/curve25519-donna-helpers.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/curve25519-donna-scalarmult-base.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/ed25519-donna-32bit-tables.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/ed25519-donna-basepoint-table.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/ed25519-donna-impl-base.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/ed25519-keccak.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/ed25519-sha3.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/ed25519.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/ed25519-donna/modm-donna-32bit.c" />
+      </folder>
+      <folder Name="chacha20poly1305">
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/chacha20poly1305/chacha_merged.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/chacha20poly1305/chacha20poly1305.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/chacha20poly1305/poly1305-donna.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/chacha20poly1305/rfc7539.c" />
+      </folder>
+      <folder Name="monero">
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/monero/range_proof.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/monero/serialize.c" />
+        <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/monero/xmr.c" />
+      </folder>
+    </folder>
+    <folder Name="nanopb">
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/nano-pb/pb_common.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/nano-pb/pb_decode.c" />
+      <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/nano-pb/pb_encode.c" />
+    </folder>
+    <configuration
+      Name="Debug"
+      arm_compiler_variant="gcc"
+      c_preprocessor_definitions="DEBUG_NRF;NRF_DFU_DEBUG_VERSION;BOARD_CUSTOM"
+      gcc_optimization_level="Level 1"
+      use_compiler_driver="No" />
+    <configuration Name="Release" c_preprocessor_definitions="BOARD_CUSTOM" />
   </project>
   <project Name="ble_secure_bootloader_v100">
     <configuration
@@ -111,7 +390,7 @@
       arm_target_device_name="nRF52840_xxAA"
       arm_target_interface_type="SWD"
       c_preprocessor_definitions="BLE_STACK_SUPPORT_REQD;CONFIG_GPIO_AS_PINRESET;FLOAT_ABI_HARD;INITIALIZE_USER_SECTIONS;NO_VTOR_CONFIG;NRF52840_XXAA;NRF_DFU_SETTINGS_VERSION=1;NRF_DFU_SVCI_ENABLED;NRF_SD_BLE_API_VERSION=6;S140;SOFTDEVICE_PRESENT;SVC_INTERFACE_CALL_AS_NORMAL_FUNCTION;USE_APP_CONFIG"
-      c_user_include_directories="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/common;/Users/gecko/ARMSDK/nRF52/15_2_0/components/boards;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic_fifo;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/balloc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader/ble_dfu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader/dfu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crc32;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310_bl;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cifra;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/mbedtls;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/micro_ecc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_hw;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_sw;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/delay;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/experimental_section_vars;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/fstorage;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mem_manager;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/memobj;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mutex;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/queue;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/ringbuf;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/scheduler;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/stack_info;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/strerror;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/svc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/timer;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/headers;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/headers/nrf52;/Users/gecko/ARMSDK/nRF52/15_2_0/components/toolchain/cmsis/include;..;/Users/gecko/ARMSDK/nRF52/15_2_0/external/fprintf;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nano-pb;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_cc310/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_cc310_bl/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_oberon;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_oberon/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/segger_rtt;/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx;/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/hal;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/include;../bootloader/config;../bootloader/include;"
+      c_user_include_directories="/Users/gecko/ARMSDK/nRF52/15_2_0/components/ble/common;/Users/gecko/ARMSDK/nRF52/15_2_0/components/boards;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/atomic_fifo;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/balloc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader/ble_dfu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader/dfu;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crc32;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cc310_bl;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/cifra;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/mbedtls;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/micro_ecc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_hw;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_sw;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/oberon;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/delay;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/experimental_section_vars;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/fstorage;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/log/src;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mem_manager;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/memobj;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/mutex;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/queue;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/ringbuf;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/scheduler;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/stack_info;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/strerror;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/svc;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/timer;/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/util;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/headers;/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/headers/nrf52;/Users/gecko/ARMSDK/nRF52/15_2_0/components/toolchain/cmsis/include;..;/Users/gecko/ARMSDK/nRF52/15_2_0/external/fprintf;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nano-pb;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_cc310/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_cc310_bl/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_oberon;/Users/gecko/ARMSDK/nRF52/15_2_0/external/nrf_oberon/include;/Users/gecko/ARMSDK/nRF52/15_2_0/external/segger_rtt;/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx;/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/hal;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers;/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/include;$(ProjectDir)/config;$(ProjectDir)/include;"
       debug_additional_load_file="/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/s140/hex/s140_nrf52_6.1.0_softdevice.hex"
       debug_register_definition_file="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/mdk/nrf52840.svd"
       debug_start_from_entry_point_symbol="No"
@@ -121,11 +400,11 @@
       linker_output_format="hex"
       linker_printf_fmt_level="long"
       linker_printf_width_precision_supported="Yes"
-      linker_section_placement_file="../bootloader/flash_placement.xml"
+      linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
       linker_section_placement_macros="FLASH_PH_START=0x0;FLASH_PH_SIZE=0x100000;RAM_PH_START=0x20000000;RAM_PH_SIZE=0x40000;FLASH_START=0xf1000;FLASH_SIZE=0xd000;RAM_START=0x200057b8;RAM_SIZE=0x3a848"
       linker_section_placements_segments="FLASH RX 0x0 0x100000;RAM RWX 0x20000000 0x40000;mbr_params_page RX 0x000FE000 0x1000;bootloader_settings_page RX 0x000FF000 0x1000;uicr_mbr_params_page RX 0x10001018 0x4;uicr_bootloader_start_address RX 0x10001014 0x4"
       macros="CMSIS_CONFIG_TOOL=/Users/gecko/ARMSDK/nRF52/15_2_0/external_tools/cmsisconfig/CMSIS_Configuration_Wizard.jar"
-      project_directory=""
+      project_directory="../bootloader"
       project_type="Executable" />
     <folder Name="Segger Startup Files">
       <file file_name="$(StudioDir)/source/thumb_crt0.s" />
@@ -199,25 +478,25 @@
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_shared.c" />
     </folder>
     <folder Name="Application">
-      <file file_name="../bootloader/src/dfu_public_key.c" />
-      <file file_name="../bootloader/src/main.c" />
+      <file file_name="$(ProjectDir)/src/dfu_public_key.c" />
+      <file file_name="$(ProjectDir)/src/main.c" />
       <folder Name="config">
-        <file file_name="../bootloader/config/sdk_config.h" />
-        <file file_name="../bootloader/config/sdk_config_debug_dk.h" />
-        <file file_name="../bootloader/config/sdk_config_debug.h" />
-        <file file_name="../bootloader/config/sdk_config_release_dk.h" />
-        <file file_name="../bootloader/config/sdk_config_release.h" />
+        <file file_name="$(ProjectDir)/config/sdk_config.h" />
+        <file file_name="$(ProjectDir)/config/sdk_config_debug_dk.h" />
+        <file file_name="$(ProjectDir)/config/sdk_config_debug.h" />
+        <file file_name="$(ProjectDir)/config/sdk_config_release_dk.h" />
+        <file file_name="$(ProjectDir)/config/sdk_config_release.h" />
       </folder>
-      <file file_name="../bootloader/src/epd_w21_c02.c" />
-      <file file_name="../bootloader/src/epd_wxx_hal.c" />
-      <file file_name="../bootloader/src/image_dfu.c" />
-      <file file_name="../bootloader/src/epd_w26.c" />
-      <file file_name="../bootloader/src/custom_board.c" />
+      <file file_name="$(ProjectDir)/src/epd_w21_c02.c" />
+      <file file_name="$(ProjectDir)/src/epd_wxx_hal.c" />
+      <file file_name="$(ProjectDir)/src/image_dfu.c" />
+      <file file_name="$(ProjectDir)/src/epd_w26.c" />
+      <file file_name="$(ProjectDir)/src/custom_board.c" />
       <folder Name="include">
-        <file file_name="../bootloader/include/custom_board.h" />
-        <file file_name="../bootloader/include/app_config.h" />
-        <file file_name="../bootloader/include/custom_board_dk.h" />
-        <file file_name="../bootloader/include/custom_board_soter.h" />
+        <file file_name="$(ProjectDir)/include/custom_board.h" />
+        <file file_name="$(ProjectDir)/include/app_config.h" />
+        <file file_name="$(ProjectDir)/include/custom_board_dk.h" />
+        <file file_name="$(ProjectDir)/include/custom_board_soter.h" />
       </folder>
     </folder>
     <folder Name="nRF_SVC">

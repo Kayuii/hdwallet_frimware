@@ -136,7 +136,7 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
-Makefile
+#Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
@@ -162,3 +162,6 @@ _deps
 
 ########## PRIVATE KEY  #################
 privkey.pem
+
+script/
+openocd/

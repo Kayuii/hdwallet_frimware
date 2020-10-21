@@ -1,0 +1,54 @@
+/*
+ * This file is part of the TREZOR project.
+ *
+ * Copyright (C) 2014 Pavol Rusnak <stick@satoshilabs.com>
+ *
+ * This library is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* === Includes ============================================================ */
+#include "driver/rng.h"
+#include "trezor-crypto/rand.h"
+#include "nrf_crypto.h"
+#include "app_error.h"
+
+uint32_t random32(void)
+{
+  static uint32_t result = 0;
+	ret_code_t ret_val = nrf_crypto_rng_vector_generate((uint8_t *)&result, 4);
+	APP_ERROR_CHECK(ret_val);
+  return result;
+}
+
+void random_buffer(uint8_t *buf, size_t len)
+{
+	ret_code_t ret_val = nrf_crypto_rng_vector_generate(buf, len);
+	APP_ERROR_CHECK(ret_val);
+}
+
+#define RANDOM_PERMUTE(BUFF, COUNT)               \
+    do {                                          \
+        for (size_t i = (COUNT)-1; i >= 1; i--) { \
+            size_t j = random_uniform(i + 1);     \
+            typeof(*(BUFF)) t = (BUFF)[j];        \
+            (BUFF)[j] = (BUFF)[i];                \
+            (BUFF)[i] = t;                        \
+        }                                         \
+    } while (0)
+
+void random_permute_char(char *str, size_t len) { RANDOM_PERMUTE(str, len); }
+
+void random_permute_u16(uint16_t *buf, size_t count) {
+    RANDOM_PERMUTE(buf, count);
+}
