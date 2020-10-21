@@ -1,3 +1,14 @@
 [submodule "thirdparty/nanopb"]
 	path = thirdparty/nanopb
 	url = https://github.com/nanopb/nanopb.git
+	branch = nanopb-0.3.9.4
+	tag = "nanopb-0.3.9.4"
+	
+[submodule "thirdparty/device-protocol"]
+	path = thirdparty/device-protocol
+	url = https://github.com/kayuii/device-protocol
+	branch = v5.10.2
+[submodule "thirdparty/trezor-crypto"]
+	path = thirdparty/trezor-crypto
+	url = https://github.com/kayuii/trezor-crypto
+	branch = 374e12de85d879c593f6932ac810d9ffd925bc3e
