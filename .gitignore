@@ -162,6 +162,3 @@ _deps
 
 ########## PRIVATE KEY  #################
 privkey.pem
-
-script/
-openocd/
