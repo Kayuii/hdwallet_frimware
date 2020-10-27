@@ -5,7 +5,7 @@
 #include "nrf_log.h"
 NRF_LOG_MODULE_REGISTER();
 
-#define MANUFACTURER_NAME "Digbig Co., Ltd." /**< Manufacturer.  */
+#define MANUFACTURER_NAME "Sotor Wallet Co., Ltd." /**< Manufacturer.  */
 #define MODEL_NUMBER "V1"                    /**< Model Number string. */
 #define MANUFACTURER_ID 0x1600161800         /**< Manufacturer ID. */
 #define ORG_UNIQUE_ID 0x161816               /**< Organisation Unique ID. */

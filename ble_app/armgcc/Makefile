@@ -1,13 +1,13 @@
 PROJECT_NAME     := soter_wallet_v1
 TARGETS          := nrf52840_xxaa
-OUTPUT_DIRECTORY := _build
+OUTPUT_DIRECTORY := ../../_build
 
 SDK_ROOT := /Users/gecko/ARMSDK/nRF52/15_2_0
 PROJ_DIR := ..
-THIRDPARTY_DIR := ../../../thirdparty
+THIRDPARTY_DIR := ../../thirdparty
 
 $(OUTPUT_DIRECTORY)/nrf52840_xxaa.out: \
-  LINKER_SCRIPT  := nrf52_u2f_gcc_nrf52.ld
+  LINKER_SCRIPT  := nrf52_u2f_gcc_nrf52_debug.ld
 
 # Source files common to all targets
 SRC_FILES += \
@@ -68,53 +68,54 @@ SRC_FILES += \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_rng.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_saadc.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_spim.c \
-  $(PROJ_DIR)/../../source/main.c \
-  $(PROJ_DIR)/../../source/board/canvas.c \
-  $(PROJ_DIR)/../../source/board/confirm_sm.c \
-  $(PROJ_DIR)/../../source/board/draw.c \
-  $(PROJ_DIR)/../../source/board/font.c \
-  $(PROJ_DIR)/../../source/board/layout.c \
-  $(PROJ_DIR)/../../source/board/memory.c \
-  $(PROJ_DIR)/../../source/board/msg_dispatch.c \
-  $(PROJ_DIR)/../../source/board/resources.c \
-  $(PROJ_DIR)/../../source/board/u2f.c \
-  $(PROJ_DIR)/../../source/firmware/app_confirm.c \
-  $(PROJ_DIR)/../../source/firmware/app_layout.c \
-  $(PROJ_DIR)/../../source/firmware/coins.c \
-  $(PROJ_DIR)/../../source/firmware/crypto.c \
-  $(PROJ_DIR)/../../source/firmware/ethereum.c \
-  $(PROJ_DIR)/../../source/firmware/ethereum_tokens.c \
-  $(PROJ_DIR)/../../source/firmware/exchange.c \
-  $(PROJ_DIR)/../../source/firmware/fsm.c \
-  $(PROJ_DIR)/../../source/firmware/passphrase_sm.c \
-  $(PROJ_DIR)/../../source/firmware/pin_sm.c \
-  $(PROJ_DIR)/../../source/firmware/policy.c \
-  $(PROJ_DIR)/../../source/firmware/qr_encode.c \
-  $(PROJ_DIR)/../../source/firmware/recovery.c \
-  $(PROJ_DIR)/../../source/firmware/recovery_cipher.c \
-  $(PROJ_DIR)/../../source/firmware/reset.c \
-  $(PROJ_DIR)/../../source/firmware/signing.c \
-  $(PROJ_DIR)/../../source/firmware/storage.c \
-  $(PROJ_DIR)/../../source/firmware/transaction.c \
-  $(PROJ_DIR)/../../source/firmware/util.c \
-  $(PROJ_DIR)/../../source/firmware/utf8.c \
-  $(PROJ_DIR)/../../source/firmware/u2f_user.c \
-  $(PROJ_DIR)/../../source/driver/battery.c \
-  $(PROJ_DIR)/../../source/driver/button.c \
-  $(PROJ_DIR)/../../source/driver/display.c \
-  $(PROJ_DIR)/../../source/driver/epd_w21_c02.c \
-  $(PROJ_DIR)/../../source/driver/epd_wxx_hal.c \
-  $(PROJ_DIR)/../../source/driver/flash_fds.c \
-  $(PROJ_DIR)/../../source/driver/gt24l24a2y_app.c \
-  $(PROJ_DIR)/../../source/driver/gt24l24a2y_hal.c \
-  $(PROJ_DIR)/../../source/driver/power.c \
-  $(PROJ_DIR)/../../source/driver/rng.c \
-  $(PROJ_DIR)/../../source/driver/soter_ble.c \
-  $(PROJ_DIR)/../../source/driver/soter_service.c \
-  $(PROJ_DIR)/../../source/driver/usb.c \
-  $(PROJ_DIR)/../../source/transport/types.pb.c \
-  $(PROJ_DIR)/../../source/transport/messages.pb.c \
-  $(PROJ_DIR)/../../source/transport/exchange.pb.c \
+  $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_wdt.c \
+  $(PROJ_DIR)/src/main.c \
+  $(PROJ_DIR)/src/board/canvas.c \
+  $(PROJ_DIR)/src/board/confirm_sm.c \
+  $(PROJ_DIR)/src/board/draw.c \
+  $(PROJ_DIR)/src/board/font.c \
+  $(PROJ_DIR)/src/board/layout.c \
+  $(PROJ_DIR)/src/board/memory.c \
+  $(PROJ_DIR)/src/board/msg_dispatch.c \
+  $(PROJ_DIR)/src/board/resources.c \
+  $(PROJ_DIR)/src/board/u2f.c \
+  $(PROJ_DIR)/src/firmware/app_confirm.c \
+  $(PROJ_DIR)/src/firmware/app_layout.c \
+  $(PROJ_DIR)/src/firmware/coins.c \
+  $(PROJ_DIR)/src/firmware/crypto.c \
+  $(PROJ_DIR)/src/firmware/ethereum.c \
+  $(PROJ_DIR)/src/firmware/ethereum_tokens.c \
+  $(PROJ_DIR)/src/firmware/exchange.c \
+  $(PROJ_DIR)/src/firmware/fsm.c \
+  $(PROJ_DIR)/src/firmware/passphrase_sm.c \
+  $(PROJ_DIR)/src/firmware/pin_sm.c \
+  $(PROJ_DIR)/src/firmware/policy.c \
+  $(PROJ_DIR)/src/firmware/qr_encode.c \
+  $(PROJ_DIR)/src/firmware/recovery.c \
+  $(PROJ_DIR)/src/firmware/recovery_cipher.c \
+  $(PROJ_DIR)/src/firmware/reset.c \
+  $(PROJ_DIR)/src/firmware/signing.c \
+  $(PROJ_DIR)/src/firmware/storage.c \
+  $(PROJ_DIR)/src/firmware/transaction.c \
+  $(PROJ_DIR)/src/firmware/util.c \
+  $(PROJ_DIR)/src/firmware/utf8.c \
+  $(PROJ_DIR)/src/firmware/u2f_user.c \
+  $(PROJ_DIR)/src/driver/battery.c \
+  $(PROJ_DIR)/src/driver/button.c \
+  $(PROJ_DIR)/src/driver/display.c \
+  $(PROJ_DIR)/src/driver/epd_w21_c02.c \
+  $(PROJ_DIR)/src/driver/epd_wxx_hal.c \
+  $(PROJ_DIR)/src/driver/flash_fds.c \
+  $(PROJ_DIR)/src/driver/gt24l24a2y_app.c \
+  $(PROJ_DIR)/src/driver/gt24l24a2y_hal.c \
+  $(PROJ_DIR)/src/driver/power.c \
+  $(PROJ_DIR)/src/driver/rng.c \
+  $(PROJ_DIR)/src/driver/soter_ble.c \
+  $(PROJ_DIR)/src/driver/soter_service.c \
+  $(PROJ_DIR)/src/driver/usb.c \
+  $(PROJ_DIR)/src/transport/types.pb.c \
+  $(PROJ_DIR)/src/transport/messages.pb.c \
+  $(PROJ_DIR)/src/transport/exchange.pb.c \
   $(SDK_ROOT)/external/segger_rtt/SEGGER_RTT.c \
   $(SDK_ROOT)/external/segger_rtt/SEGGER_RTT_Syscalls_GCC.c \
   $(SDK_ROOT)/external/segger_rtt/SEGGER_RTT_printf.c \
@@ -207,7 +208,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/softdevice/common/nrf_sdh.c \
   $(SDK_ROOT)/components/softdevice/common/nrf_sdh_ble.c \
   $(SDK_ROOT)/components/softdevice/common/nrf_sdh_freertos.c \
-  $(SDK_ROOT)/components/softdevice/common/nrf_sdh_soc.c \ \
+  $(SDK_ROOT)/components/softdevice/common/nrf_sdh_soc.c \
   $(SDK_ROOT)/external/nano-pb/pb_common.c \
   $(SDK_ROOT)/external/nano-pb/pb_decode.c \
   $(SDK_ROOT)/external/nano-pb/pb_encode.c \
@@ -260,14 +261,14 @@ SRC_FILES += \
   $(THIRDPARTY_DIR)/trezor-crypto/monero/serialize.c \
   $(THIRDPARTY_DIR)/trezor-crypto/monero/xmr.c \
 
+
 # Include folders common to all targets
 INC_FOLDERS += \
   $(PROJ_DIR)/config \
-  $(PROJ_DIR)/../../source/firmware \
-  $(PROJ_DIR)/../../thirdparty \
-  $(PROJ_DIR)/../../include \
-  $(PROJ_DIR)/../../include/transport \
-  $(SDK_ROOT)/external/nano-pb/
+  $(PROJ_DIR)/src/firmware \
+  $(PROJ_DIR)/../thirdparty \
+  $(PROJ_DIR)/include \
+  $(PROJ_DIR)/include/transport \
   $(THIRDPARTY_DIR)/trezor-crypto \
   $(THIRDPARTY_DIR)/trezor-crypto/aes \
   $(THIRDPARTY_DIR)/trezor-crypto/chacha20poly1305 \
@@ -393,6 +394,7 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/softdevice/s140/headers/nrf52 \
   $(SDK_ROOT)/components/toolchain/cmsis/include \
   $(SDK_ROOT)/external \
+  $(SDK_ROOT)/external/nano-pb/ \
   $(SDK_ROOT)/external/fprintf \
   $(SDK_ROOT)/external/nrf_cc310/include \
   $(SDK_ROOT)/external/freertos/config \
@@ -423,7 +425,7 @@ OPT = -O1 -g1
 CFLAGS += -std=gnu99
 CFLAGS += $(OPT)
 CFLAGS += -DDEBUG
-CFLAGS += -DDEBUG_NRF
+# CFLAGS += -DDEBUG_NRF
 CFLAGS += -DCONFIG_RANDOM_AES_KEY_ENABLED
 CFLAGS += -DBOARD_CUSTOM
 CFLAGS += -DFLOAT_ABI_HARD
@@ -459,7 +461,7 @@ ASMFLAGS += -mthumb -mabi=aapcs
 ASMFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 ASMFLAGS += -DBOARD_CUSTOM
 ASMFLAGS += -DDEBUG
-ASMFLAGS += -DDEBUG_NRF
+# ASMFLAGS += -DDEBUG_NRF
 ASMFLAGS += -DFLOAT_ABI_HARD
 ASMFLAGS += -DNRF52840_XXAA
 

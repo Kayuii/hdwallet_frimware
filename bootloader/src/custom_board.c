@@ -9,7 +9,7 @@
  * Function for configuring UICR_REGOUT0 register
  * to set GPIO output voltage to 3.0V.
  */
-static void gpio_output_voltage_setup(void)
+static void voltage_setup(void)
 {
     if ((NRF_UICR->REGOUT0 & UICR_REGOUT0_VOUT_Msk) ==
         (UICR_REGOUT0_VOUT_DEFAULT << UICR_REGOUT0_VOUT_Pos))
@@ -29,7 +29,7 @@ static void gpio_output_voltage_setup(void)
 }
 #endif
 
-void bsp_board_voltage_init(void)
+void voltage_init(void)
 {
 #if defined(BOARD_CUSTOM) && !defined(NRF_DK)
     // If nRF52 USB Dongle is powered from USB (high voltage mode),
@@ -39,7 +39,7 @@ void bsp_board_voltage_init(void)
     if (NRF_POWER->MAINREGSTATUS &
        (POWER_MAINREGSTATUS_MAINREGSTATUS_High << POWER_MAINREGSTATUS_MAINREGSTATUS_Pos))
     {
-        gpio_output_voltage_setup();
+        voltage_setup();
     }
 #endif
 }

@@ -21,6 +21,8 @@
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 
+//#define EPD_Wxx_SPI_SW
+
 #define EPD_Wxx_MOSI_0 nrf_gpio_pin_clear(EPD_Wxx_MOSI_PIN)
 #define EPD_Wxx_MOSI_1 nrf_gpio_pin_set(EPD_Wxx_MOSI_PIN)
 

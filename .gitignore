@@ -143,13 +143,18 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+########## vscode  #################
+.vscode/
 
 ########## Config  #################
+*.log
+*.zip
 
 #Build Directories
 [Dd]ebug/
 [Rr]elease/
 [Oo]utput/
+_build/
 
 #Build Results
 *.o
@@ -159,6 +164,7 @@ _deps
 *.hex
 *.map
 *.srec
+
 
 ########## PRIVATE KEY  #################
 privkey.pem

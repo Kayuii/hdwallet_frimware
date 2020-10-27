@@ -62,21 +62,16 @@
 #include "nrf_bootloader_info.h"
 #include "nrf_delay.h"
 #include "app_timer.h"
+#include "nrf_bootloader_info.h"
 
 #include "epd_w21_c02.h"
 
 extern const unsigned char gImage_dfu[];
 extern const unsigned char gImage_soterwallet[];
+extern const unsigned char logo_data[];
+
 
 unsigned char gImage_full[EPD_FULLBUF_SIZE];
-
-// #define X_LEDS_LIST                        \
-//     {                                      \
-//         BSP_BOARD_LED_0, BSP_BOARD_LED_1, BSP_BOARD_LED_3, BSP_BOARD_LED_2 \
-//     }
-
-// static const uint8_t x_board_led_list[LEDS_NUMBER] = X_LEDS_LIST;
-static uint16_t delay_t = 500;
 
 static void on_error(void)
 {
@@ -116,31 +111,16 @@ static void led_flash(void)
     bsp_board_led_invert(BSP_BOARD_LED_1);
 }
 
-// void marquee(void)
-// {
-//     for (int i = 0; i < LEDS_NUMBER; i++)
-//     {
-//         //bsp_board_leds_off();
-//         //nrf_gpio_pin_toggle(x_board_led_list[i]);
-
-//         if(bsp_board_led_state_get(x_board_led_list[i]))
-//         {
-//             bsp_board_led_off(x_board_led_list[i]);
-//         }else{
-//             bsp_board_led_on(x_board_led_list[i]);
-//         }
-
-//         //bsp_board_led_on(x_board_led_list[i]);
-//         nrf_delay_ms(delay_t);
-//         //bsp_board_led_off(x_board_led_list[i]);
-//     }
-// }
-
 void displaydfuimage(void)
 {
     displayclear();
     epd_refresh_area(32, 142, gImage_dfu, 32, 24);
     epd_refresh_area(66, 190, gImage_soterwallet, 130, 24);
+
+    // 顶高   54     左宽      190        显示长      130   显示行数   24
+    // epd_refresh_area(66, 190, gImage_soterwallet, 130, 24);
+    // epd_refresh_area(32, 190, logo_data, 125, 22);
+    
     epd_part_update();
 }
 
@@ -169,7 +149,7 @@ static void dfu_observer(nrf_dfu_evt_type_t evt_type)
     case NRF_DFU_EVT_DFU_ABORTED:
     case NRF_DFU_EVT_DFU_INITIALIZED:
         /**< Starting DFU. */
-        // bsp_board_init(BSP_INIT_LEDS);
+        //bsp_board_init(BSP_INIT_LEDS);
         //bsp_board_led_on(BSP_BOARD_LED_0);
         //bsp_board_led_on(BSP_BOARD_LED_1);
         nrf_bootloader_wdt_feed_timer_start(NRF_BOOTLOADER_MS_TO_TICKS(200), led_flash);
@@ -219,10 +199,28 @@ int main(void)
 {
     uint32_t ret_val;
 
-    bsp_board_voltage_init();
+    //voltage_init();
     bsp_board_init(BSP_INIT_LEDS);
     bsp_board_led_on(BSP_BOARD_LED_0);
     bsp_board_led_on(BSP_BOARD_LED_1);
+
+
+    if ((NRF_UICR->REGOUT0 & UICR_REGOUT0_VOUT_Msk) ==
+        (UICR_REGOUT0_VOUT_DEFAULT << UICR_REGOUT0_VOUT_Pos))
+    {
+        //NRF_LOG_INFO("UICR_REGOUT0 config");
+        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen;
+        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+
+        NRF_UICR->REGOUT0 = (NRF_UICR->REGOUT0 & ~((uint32_t)UICR_REGOUT0_VOUT_Msk)) |
+                            (UICR_REGOUT0_VOUT_2V7 << UICR_REGOUT0_VOUT_Pos);
+
+        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren;
+        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+
+        // System reset is needed to update UICR registers.
+        NVIC_SystemReset();
+    }
 
     // Protect MBR and bootloader code from being overwritten.
     ret_val = nrf_bootloader_flash_protect(0, MBR_SIZE, false);
@@ -233,8 +231,11 @@ int main(void)
     (void)NRF_LOG_INIT(nrf_bootloader_dfu_timer_counter_get);
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 
-    NRF_LOG_INFO("Inside main");
+    NRF_LOG_INFO("Inside bootloader main");
     UNUSED_RETURN_VALUE(NRF_LOG_PROCESS());
+
+    
+    //sd_power_gpregret_clr(0,0xffffffff);
 
     // epd_wxx_hal_init();
     // epd_init_full();
@@ -251,7 +252,7 @@ int main(void)
     // led_flash();
 
     // Should never be reached.
-    NRF_LOG_INFO("After main");
+    NRF_LOG_INFO("After bootloader main");
 }
 
 /**

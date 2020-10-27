@@ -163,29 +163,62 @@
       <folder Name="firmware">
         <file file_name="$(ProjectDir)/src/firmware/app_confirm.c" />
         <file file_name="$(ProjectDir)/src/firmware/app_layout.c" />
-        <file file_name="$(ProjectDir)/src/firmware/coins.c" />
-        <file file_name="$(ProjectDir)/src/firmware/crypto.c" />
-        <file file_name="$(ProjectDir)/src/firmware/ethereum.c" />
-        <file file_name="$(ProjectDir)/src/firmware/ethereum_tokens.c" />
-        <file file_name="$(ProjectDir)/src/firmware/exchange.c" />
-        <file file_name="$(ProjectDir)/src/firmware/fsm.c" />
+        <file file_name="$(ProjectDir)/src/firmware/coins.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/crypto.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/ethereum.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/ethereum_tokens.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/exchange.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/fsm.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
         <file file_name="$(ProjectDir)/src/firmware/passphrase_sm.c" />
         <file file_name="$(ProjectDir)/src/firmware/pin_sm.c" />
         <file file_name="$(ProjectDir)/src/firmware/policy.c" />
         <file file_name="$(ProjectDir)/src/firmware/qr_encode.c" />
-        <file file_name="$(ProjectDir)/src/firmware/recovery.c" />
-        <file file_name="$(ProjectDir)/src/firmware/recovery_cipher.c" />
-        <file file_name="$(ProjectDir)/src/firmware/reset.c" />
-        <file file_name="$(ProjectDir)/src/firmware/signing.c" />
-        <file file_name="$(ProjectDir)/src/firmware/storage.c" />
-        <file file_name="$(ProjectDir)/src/firmware/transaction.c" />
+        <file file_name="$(ProjectDir)/src/firmware/recovery.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/recovery_cipher.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/reset.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/signing.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/storage.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
+        <file file_name="$(ProjectDir)/src/firmware/transaction.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
         <file file_name="$(ProjectDir)/src/firmware/util.c" />
-        <file file_name="$(ProjectDir)/src/firmware/u2f_user.c" />
+        <file file_name="$(ProjectDir)/src/firmware/u2f_user.c">
+          <configuration Name="Debug" build_exclude_from_build="No" />
+        </file>
         <file file_name="$(ProjectDir)/src/firmware/fsm_msg_coin.h" />
         <file file_name="$(ProjectDir)/src/firmware/fsm_msg_common.h" />
         <file file_name="$(ProjectDir)/src/firmware/fsm_msg_crypto.h" />
         <file file_name="$(ProjectDir)/src/firmware/fsm_msg_ethereum.h" />
         <file file_name="$(ProjectDir)/src/firmware/utf8.c" />
+      </folder>
+      <folder Name="include">
+        <file file_name="include/app_config.h" />
+        <file file_name="include/custom_board_dk.h" />
+        <file file_name="include/custom_board_soter.h" />
+        <file file_name="include/custom_board.h" />
+        <file file_name="include/FreeRTOSConfig.h" />
       </folder>
     </folder>
     <folder Name="nRF_Segger_RTT">
@@ -230,6 +263,7 @@
     </folder>
     <folder Name="font_library">
       <file file_name="$(ProjectDir)/../thirdparty/gt24l24a2y/gt24l24a2y_nrf52840_segger.a" />
+      <configuration Name="Debug" build_exclude_from_build="No" />
     </folder>
     <folder Name="nRF_Crypto backend nRF HW">
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/backend/nrf_hw/nrf_hw_backend_init.c" />
@@ -298,9 +332,11 @@
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/softdevice/common/nrf_sdh_soc.c" />
     </folder>
     <folder Name="Config">
-      <file file_name="$(ProjectDir)/include/FreeRTOSConfig.h" />
-      <file file_name="$(ProjectDir)/config/custom_board.h" />
       <file file_name="$(ProjectDir)/config/sdk_config.h" />
+      <file file_name="config/sdk_config_debug_dk.h" />
+      <file file_name="config/sdk_config_debug.h" />
+      <file file_name="config/sdk_config_release_dk.h" />
+      <file file_name="config/sdk_config_release.h" />
     </folder>
     <folder Name="trezor-crypto">
       <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/address.c" />
@@ -359,6 +395,7 @@
         <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/monero/serialize.c" />
         <file file_name="$(ProjectDir)/../thirdparty/trezor-crypto/monero/xmr.c" />
       </folder>
+      <configuration Name="Debug" build_exclude_from_build="No" />
     </folder>
     <folder Name="nanopb">
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/external/nano-pb/pb_common.c" />
@@ -369,7 +406,17 @@
       Name="Debug"
       arm_compiler_variant="gcc"
       c_preprocessor_definitions="DEBUG_NRF;NRF_DFU_DEBUG_VERSION;BOARD_CUSTOM"
-      gcc_optimization_level="Level 1"
+      debug_target_connection="J-Link"
+      gcc_optimization_level="Level 2 for speed"
+      gdb_server_allow_memory_access_during_execution="Yes"
+      gdb_server_autostart_server="No"
+      gdb_server_command_line=""
+      gdb_server_ignore_checksum_errors="No"
+      gdb_server_port="3333"
+      gdb_server_register_access="General and Individual"
+      gdb_server_reset_command="reset halt"
+      gdb_server_type="OpenOCD"
+      linker_section_placement_macros="FLASH_START=0x26000;FLASH_SIZE=0xc5000"
       use_compiler_driver="No" />
     <configuration Name="Release" c_preprocessor_definitions="BOARD_CUSTOM" />
   </project>
@@ -490,7 +537,6 @@
       <file file_name="$(ProjectDir)/src/epd_w21_c02.c" />
       <file file_name="$(ProjectDir)/src/epd_wxx_hal.c" />
       <file file_name="$(ProjectDir)/src/image_dfu.c" />
-      <file file_name="$(ProjectDir)/src/epd_w26.c" />
       <file file_name="$(ProjectDir)/src/custom_board.c" />
       <folder Name="include">
         <file file_name="$(ProjectDir)/include/custom_board.h" />
@@ -555,9 +601,9 @@
     </folder>
     <configuration
       Name="Debug"
-      c_preprocessor_definitions="DEBUG_NRF;NRF_DFU_DEBUG_VERSION;BOARD_CUSTOM"
+      c_preprocessor_definitions="BOARD_CUSTOM;DEBUG_KEY"
       c_user_include_directories=".;/Users/gecko/ARMSDK/nRF52/15_2_0/external/segger_rtt"
-      debug_target_connection="GDB Server"
+      debug_target_connection="J-Link"
       gcc_optimization_level="Level 1"
       gdb_server_allow_memory_access_during_execution="Yes"
       gdb_server_autostart_server="No"
@@ -572,7 +618,7 @@
       Name="Release"
       c_preprocessor_definitions="NDEBUG;BOARD_CUSTOM"
       c_user_include_directories="."
-      debug_target_connection="GDB Server"
+      debug_target_connection="J-Link"
       gcc_optimization_level="Level 2 for size"
       gdb_server_allow_memory_access_during_execution="Yes"
       gdb_server_autostart_server="No"

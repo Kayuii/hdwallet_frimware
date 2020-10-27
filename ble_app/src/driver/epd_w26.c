@@ -214,7 +214,7 @@ void EPD_display_init(void)
 		lcd_chkstatus();
 
 		epd_wxx_hal_write_cmd(EPD_Wxx_CMD_PSR);			//panel setting
-		epd_wxx_hal_write_data_char(0xd3);		//LUT from OTP��0xbf: 128x296  0xdf:160x296 Bean 20181113
+		epd_wxx_hal_write_data_char(0xd3);		//LUT from OTP锟斤拷0xbf: 128x296  0xdf:160x296 Bean 20181113
 		epd_wxx_hal_write_data_char(0x0d);		//VCOM to 0V fast
 		
 		epd_wxx_hal_write_cmd(EPD_Wxx_CMD_PLL);			//PLL setting

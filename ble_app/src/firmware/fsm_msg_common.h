@@ -15,7 +15,7 @@ void fsm_msgGetFeatures(GetFeatures *msg) {
 
     /* Vendor */
     resp->has_vendor = true;
-    strlcpy(resp->vendor, "Digbig", sizeof(resp->vendor));
+    strlcpy(resp->vendor, "Sotor", sizeof(resp->vendor));
 
     /* Version */
     resp->has_major_version = true;

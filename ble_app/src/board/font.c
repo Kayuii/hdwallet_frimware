@@ -1661,20 +1661,21 @@ static const CharacterImage sadface_9x10 = {image_font_sadface_9x10, 9, 10};
 static char image_tmp_data[MAX_FONT_IMAGE_BYTES] = {0};
 
 static void set_font_language(Font *font) {
-    const char *language = (const char *)storage_getLanguage();
-    if (NULL == language) {
-        font->language = ENGLISH;  // default language
-    } else if (strcmp(language, "english") == 0) {
-        font->language = ENGLISH;
-    } else if (strcmp(language, "chinese") == 0) {
-        font->language = CHINESE;
-    } else if (strcmp(language, "japanese") == 0) {
-        font->language = JAPANESE;
-    } else if (strcmp(language, "korean") == 0) {
-        font->language = KOREAN;
-    } else {
-        font->language = ENGLISH;
-    }
+    font->language = ENGLISH;  // default language
+    //const char *language = (const char *)storage_getLanguage();
+    //if (NULL == language) {
+    //    font->language = ENGLISH;  // default language
+    //} else if (strcmp(language, "english") == 0) {
+    //    font->language = ENGLISH;
+    //} else if (strcmp(language, "chinese") == 0) {
+    //    font->language = CHINESE;
+    //} else if (strcmp(language, "japanese") == 0) {
+    //    font->language = JAPANESE;
+    //} else if (strcmp(language, "korean") == 0) {
+    //    font->language = KOREAN;
+    //} else {
+    //    font->language = ENGLISH;
+    //}
 }
 
 static void set_font_type(Font *font) {

@@ -9,7 +9,7 @@ static const nrf_drv_spi_t spi =
 
 static uint8_t spisendbuf[256] __attribute((aligned(4)));
 
-#ifdef FREERTOS1
+#ifdef FREERTOS
 static SemaphoreHandle_t xSemaphore_epd_wxx_spi;
 #else
 static uint8_t fspicplted = 0;
@@ -18,7 +18,7 @@ static uint8_t fspicplted = 0;
 static void spi_event_handler(nrf_drv_spi_evt_t const *p_event,
                               void *p_context) {
 //					NRF_LOG_DEBUG("---spi_event_handler--");
-#ifdef FREERTOS1
+#ifdef FREERTOS
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     xSemaphoreGiveFromISR(xSemaphore_epd_wxx_spi, &xHigherPriorityTaskWoken);
     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
@@ -28,7 +28,7 @@ static void spi_event_handler(nrf_drv_spi_evt_t const *p_event,
 }
 
 static void ClearSpicomflag(void) {
-#ifdef FREERTOS1
+#ifdef FREERTOS
     xSemaphoreTake(xSemaphore_epd_wxx_spi, 0);
 #else
     fspicplted = 0;
@@ -36,7 +36,7 @@ static void ClearSpicomflag(void) {
 }
 
 static uint8_t WaitSpicomcomplete(uint16_t ms) {
-#ifdef FREERTOS1
+#ifdef FREERTOS
     if (pdFALSE == xSemaphoreTake(xSemaphore_epd_wxx_spi, ms))
         return 2;
     else
@@ -56,9 +56,43 @@ static uint8_t WaitSpicomcomplete(uint16_t ms) {
     return 0;  // Ok;
 #endif
 }
+#ifdef EPD_Wxx_SPI_SW
+static void sw_spi_writebyte(uint8_t TxData)
+{				   			 
+	uint8_t TempData;
+	uint8_t scnt;
+	TempData=TxData;
 
+	EPD_Wxx_CLK_0;  
+    nrf_delay_us(1);
+	for(scnt=0;scnt<8;scnt++)
+	{ 
+		if(TempData&0x80)
+			EPD_Wxx_MOSI_1;
+		else
+			EPD_Wxx_MOSI_0;
+		EPD_Wxx_CLK_1;
+		nrf_delay_us(1);
+		EPD_Wxx_CLK_0;  
+        nrf_delay_us(1);
+		TempData=TempData<<1;
+  }
+}
+static uint8_t SPI_WriteBuf(const uint8_t *buf, uint16_t len, uint8_t resetcs) 
+{
+//	uint8_t *buftosend = buf;
+	uint16_t i;
+	EPD_Wxx_CS_0;
+    for(i=0;i<len;i++)
+	{
+		sw_spi_writebyte(buf[i]);
+	}
+	if (resetcs) EPD_Wxx_CS_1;
+	return 0;
+}
+#else
 static uint8_t SPI_WriteBuf(const uint8_t *buf, uint16_t len, uint8_t resetcs) {
-    uint8_t *buftosend = buf;
+    const uint8_t *buftosend = buf;
 
     uint8_t framlen = 0xFF;
 
@@ -101,9 +135,14 @@ static uint8_t SPI_WriteBuf(const uint8_t *buf, uint16_t len, uint8_t resetcs) {
 
     return 0;
 }
+#endif
 
 void epd_wxx_hal_init(void) {
-#ifdef FREERTOS1
+#ifdef EPD_Wxx_SPI_SW
+	nrf_gpio_cfg_output(EPD_Wxx_MOSI_PIN);
+	nrf_gpio_cfg_output(EPD_Wxx_CLK_PIN);
+#else
+#ifdef FREERTOS
     xSemaphore_epd_wxx_spi = xSemaphoreCreateBinary();
 
     if (xSemaphore_epd_wxx_spi == NULL) {
@@ -118,7 +157,7 @@ void epd_wxx_hal_init(void) {
 
     APP_ERROR_CHECK(
         nrf_drv_spi_init(&spi, &spi_config, spi_event_handler, NULL));
-
+#endif
     nrf_gpio_cfg_output(EPD_Wxx_CS_PIN);
     nrf_gpio_cfg_output(EPD_Wxx_DC_PIN);
     nrf_gpio_cfg_output(EPD_Wxx_RST_PIN);
@@ -126,7 +165,10 @@ void epd_wxx_hal_init(void) {
 }
 
 void epd_wxx_hal_uninit(void) {
+#ifdef EPD_Wxx_SPI_SW
+#else
     nrf_drv_spi_uninit(&spi);
+#endif
     nrf_gpio_cfg_default(EPD_Wxx_MOSI_PIN);
     nrf_gpio_cfg_default(EPD_Wxx_CLK_PIN);
     nrf_gpio_cfg_default(EPD_Wxx_CS_PIN);

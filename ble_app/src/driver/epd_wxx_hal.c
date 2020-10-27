@@ -17,7 +17,7 @@ static uint8_t fspicplted = 0;
 
 static void spi_event_handler(nrf_drv_spi_evt_t const *p_event,
                               void *p_context) {
-//					NRF_LOG_DEBUG("---spi_event_handler--");
+					NRF_LOG_DEBUG("---spi_event_handler--");
 #ifdef FREERTOS1
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     xSemaphoreGiveFromISR(xSemaphore_epd_wxx_spi, &xHigherPriorityTaskWoken);
@@ -64,7 +64,7 @@ static uint8_t SPI_WriteBuf(const uint8_t *buf, uint16_t len, uint8_t resetcs) {
 
     ret_code_t ret;
 
-    NRF_LOG_INFO("SPI_WriteBuf %d", len);NRF_LOG_PROCESS();
+    // NRF_LOG_DEBUG("SPI_WriteBuf %d", len);NRF_LOG_PROCESS();
 
     EPD_Wxx_CS_0;
 
@@ -73,7 +73,7 @@ static uint8_t SPI_WriteBuf(const uint8_t *buf, uint16_t len, uint8_t resetcs) {
 
         ClearSpicomflag();
 		ret = nrf_drv_spi_transfer(&spi, spisendbuf, framlen, NULL, 0);
-		NRF_LOG_INFO("%d", ret);NRF_LOG_PROCESS();
+		// NRF_LOG_DEBUG("A: %d", ret);NRF_LOG_PROCESS();
         APP_ERROR_CHECK(ret);
         if (0 != WaitSpicomcomplete(40)) {
             NRF_LOG_WARNING("epd_w21WriteCmd time out!");
@@ -89,7 +89,7 @@ static uint8_t SPI_WriteBuf(const uint8_t *buf, uint16_t len, uint8_t resetcs) {
 
     ClearSpicomflag();
     ret = nrf_drv_spi_transfer(&spi, spisendbuf, len, NULL, 0);
-	NRF_LOG_INFO("%d", ret);NRF_LOG_PROCESS();
+	// NRF_LOG_DEBUG("B: %d", ret);NRF_LOG_PROCESS();
     APP_ERROR_CHECK(ret);
     if (0 != WaitSpicomcomplete(40)) {
         NRF_LOG_WARNING("epd_w21WriteCmd time out!");
@@ -136,15 +136,18 @@ void epd_wxx_hal_uninit(void) {
 
 void epd_wxx_hal_write_cmd(unsigned char command) {
     EPD_Wxx_DC_C;  // command write
+    NRF_LOG_DEBUG("SPI write cmd");
     SPI_WriteBuf(&command, 1, true);
     EPD_Wxx_DC_D;  // command write
 }
 
 void epd_wxx_hal_write_data_char(unsigned char data) {
+    NRF_LOG_DEBUG("SPI write char");
     SPI_WriteBuf(&data, 1, true);
 }
 
 void epd_wxx_hal_write_data_buffer(const uint8_t *buf, uint16_t len) {
+    NRF_LOG_DEBUG("SPI write buffer");
     SPI_WriteBuf(buf, len, true);
 }
 

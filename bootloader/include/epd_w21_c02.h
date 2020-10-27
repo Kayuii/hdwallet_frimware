@@ -24,5 +24,8 @@ void epd_init_full(void);
 void epd_refresh_full(const unsigned char* data);
 void epd_init_part(void);
 void epd_refresh_partial(unsigned char *gnDisBuf);
-
+void epd_refresh_area(unsigned int x_start, unsigned int y_start,
+                      const unsigned char *datas, unsigned int PART_COLUMN,
+                      unsigned int PART_LINE);
+void epd_part_update(void);
 #endif //_EPD_W21_C02_H_

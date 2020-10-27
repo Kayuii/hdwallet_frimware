@@ -307,13 +307,20 @@ int main(void) {
         APP_ERROR_HANDLER(NRF_ERROR_NO_MEM);
     }
 
+    NRF_LOG_INFO("app main task");
+
+
     usb_init();
     soter_ble_init((char *)g_product_id);
 
+    nrf_delay_ms(10000);
+    
     // Activate deep sleep mode.
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
     // Start FreeRTOS scheduler.
     vTaskStartScheduler();
+
+    NRF_LOG_INFO("app main run");
 
     for (;;) {
         APP_ERROR_HANDLER(NRF_ERROR_FORBIDDEN);

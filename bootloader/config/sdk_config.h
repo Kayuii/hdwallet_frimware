@@ -47,7 +47,7 @@
 #include "app_config.h"
 #endif
 
-#ifdef DEBUG_NRF
+#ifndef NDEBUG
 #ifdef NRF_DK
 #include "sdk_config_debug_dk.h"
 #else

@@ -56,12 +56,6 @@ static inline void epd_update(void) {
     wait();
 }
 
-//static inline void epd_part_update(void) {
-//    epd_wxx_hal_write_cmd(0x22);
-//    epd_wxx_hal_write_data_char(0x0C);
-//    epd_wxx_hal_write_cmd(0x20);
-//    wait();
-//}
 void epd_part_update(void) {
     epd_wxx_hal_write_cmd(0x22);
     epd_wxx_hal_write_data_char(0x0C);
@@ -111,8 +105,7 @@ void epd_refresh_area(unsigned int x_start, unsigned int y_start,
 
     epd_wxx_hal_write_cmd(0x44);  // set RAM x address start/end, in page 35
     epd_wxx_hal_write_data_char(x_start);  // RAM x address start at 00h;
-    epd_wxx_hal_write_data_char(
-        x_end);                   // RAM x address end at 0fh(15+1)*8->128
+    epd_wxx_hal_write_data_char(x_end);                   // RAM x address end at 0fh(15+1)*8->128
     epd_wxx_hal_write_cmd(0x45);  // set RAM y address start/end, in page 35
     epd_wxx_hal_write_data_char(y_start2);  // RAM y address start at 0127h;
     epd_wxx_hal_write_data_char(y_start1);  // RAM y address start at 0127h;
@@ -127,7 +120,7 @@ void epd_refresh_area(unsigned int x_start, unsigned int y_start,
 
     epd_wxx_hal_write_cmd(0x24);  // Write Black and White image to RAM
     epd_wxx_hal_write_data_buffer(datas, PART_COLUMN * PART_LINE / 8);
-    //epd_part_update();
+//    epd_part_update();
 }
 
 void epd_refresh_partial(unsigned char *gnDisBuf) {

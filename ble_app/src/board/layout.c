@@ -465,7 +465,8 @@ void layout_product_info(int32_t major, int32_t minor, int32_t patch) {
                 font_height(body_font));
 
     // Draw uuid information
-    const char *uuid_str = storage_getUuidStr();
+    //const char *uuid_str = storage_getUuidStr();
+    const char *uuid_str = "XX";
     if (strlen(uuid_str) > 0) {
         snprintf(info, MEDIUM_STR_BUF, "UUID: %s", uuid_str);
         sp.x = (DISPLAY_WIDTH - calc_str_width(body_font, info)) / 2;
