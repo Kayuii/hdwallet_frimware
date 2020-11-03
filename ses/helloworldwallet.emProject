@@ -516,6 +516,7 @@
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/hal/nrf_nvmc.c" />
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/integration/nrfx/legacy/nrf_drv_spi.c" />
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_spim.c" />
+      <file file_name="../../../../ARMSDK/nRF52/15_2_0/modules/nrfx/drivers/src/nrfx_spi.c" />
     </folder>
     <folder Name="nRF_Crypto">
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/crypto/nrf_crypto_ecc.c" />
@@ -543,7 +544,20 @@
         <file file_name="$(ProjectDir)/include/app_config.h" />
         <file file_name="$(ProjectDir)/include/custom_board_dk.h" />
         <file file_name="$(ProjectDir)/include/custom_board_soter.h" />
+        <file file_name="include/display.h" />
+        <file file_name="include/epd_w21_c02.h" />
+        <file file_name="include/epd_wxx_hal.h" />
+        <file file_name="include/paper.h">
+          <configuration Name="Debug" build_exclude_from_build="Yes" />
+        </file>
       </folder>
+      <file file_name="src/image_dfu_white.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
+      <file file_name="src/display.c" />
+      <file file_name="src/paper.c">
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
+      </file>
     </folder>
     <folder Name="nRF_SVC">
       <file file_name="/Users/gecko/ARMSDK/nRF52/15_2_0/components/libraries/bootloader/dfu/nrf_dfu_svci_handler.c" />

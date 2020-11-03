@@ -37,17 +37,17 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#ifndef CUSTOM_BOARD_DK_H
-#define CUSTOM_BOARD_DK_H
+#ifndef CUSTOM_BOARD_H
+#define CUSTOM_BOARD_H
 
 #ifdef NRF_DK
+#define BOARD_PCA10056
+#include "pca10056.h"
 #include "custom_board_dk.h"
 #else
 #include "custom_board_soter.h"
 #endif
 
 void voltage_init(void);
-void displaydfuimage(void);
-void displayclear(void);
 
-#endif // CUSTOM_BOARD_DK_H
+#endif // CUSTOM_BOARD_H

@@ -17,6 +17,7 @@ mergehex -m $SDK_ROOT/components/softdevice/s140/hex/s140_nrf52_6.1.0_softdevice
             $OUTPUT_DIRECTORY/nrf52840_xxaa.hex \
          -o $OUTPUT_DIRECTORY/nrf52840_xxaa_full.hex
 
+nrfjprog -f nrf52 --recover
 nrfjprog -f nrf52 --eraseall
 nrfjprog -f nrf52 --program $OUTPUT_DIRECTORY/nrf52840_xxaa_full.hex
 nrfjprog -f nrf52 --rbp ALL

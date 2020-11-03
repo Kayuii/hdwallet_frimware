@@ -582,10 +582,15 @@ void layout_animate_images(void *data, uint32_t duration, uint32_t elapsed) {
  */
 void layout_clear(void) {
     layout_clear_animations();
+#if (DOT_WHITE_VALUE == 1)
     draw_box_simple(m_canvas, 0x00, 5, 5, 100, TOP_MARGIN - 5);
     draw_box_simple(m_canvas, 0x00, LEFT_MARGIN, TOP_MARGIN,
                     250 - (LEFT_MARGIN + RIGHT_MARGIN),
                     122 - (TOP_MARGIN + BOTTOM_MARGIN));
+#else
+    // draw_box_simple(m_canvas, 0x00, 0, 0 100, TOP_MARGIN);
+    draw_box_simple(m_canvas, 0x00, 0, 0, 250, 122);
+#endif
 }
 
 /*

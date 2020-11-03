@@ -18,7 +18,8 @@
 
 #define ALLSCREEN_GRAGHBYTES 4000
 
-#define DOT_WHITE_VALUE		1
+// 界面颜色反转 0 为白色  1 为黑色
+#define DOT_WHITE_VALUE		0
 
 void epd_init_full(void);
 void epd_refresh_full(const unsigned char* data);

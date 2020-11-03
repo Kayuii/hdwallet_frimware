@@ -24,6 +24,7 @@ static inline void lsh_arry_bits(unsigned char *arry, unsigned int len,
 void display_clear(void) {
     for (uint16_t i = 0; i < EPD_FULLBUF_SIZE; i++) {
         display_buffer[i] = 0xFF;
+        // display_buffer[i] = 0x00;
     }
     epd_refresh_full(display_buffer);
 }

@@ -58,6 +58,7 @@ SRC_FILES += \
   $(PROJ_DIR)/src/epd_w21_c02.c \
   $(PROJ_DIR)/src/image_dfu.c \
   $(PROJ_DIR)/src/custom_board.c \
+  $(PROJ_DIR)/src/display.c \
   $(PROJ_DIR)/src/main.c \
   $(SDK_ROOT)/components/libraries/bootloader/dfu/nrf_dfu_svci_handler.c \
   $(SDK_ROOT)/components/libraries/svc/nrf_svc_handler.c \
@@ -169,6 +170,7 @@ CFLAGS += -DDEBUG_KEY
 CFLAGS += -DDEBUG
 CFLAGS += -DUSE_APP_CONFIG
 CFLAGS += -DBOARD_CUSTOM
+# CFLAGS += -DNRF_DK
 # CFLAGS += -DDEBUG_NRF
 # CFLAGS += -DNRF_DFU_DEBUG_VERSION
 CFLAGS += -DBLE_STACK_SUPPORT_REQD

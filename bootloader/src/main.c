@@ -63,15 +63,8 @@
 #include "nrf_delay.h"
 #include "app_timer.h"
 #include "nrf_bootloader_info.h"
+#include "display.h"
 
-#include "epd_w21_c02.h"
-
-extern const unsigned char gImage_dfu[];
-extern const unsigned char gImage_soterwallet[];
-extern const unsigned char logo_data[];
-
-
-unsigned char gImage_full[EPD_FULLBUF_SIZE];
 
 static void on_error(void)
 {
@@ -111,33 +104,6 @@ static void led_flash(void)
     bsp_board_led_invert(BSP_BOARD_LED_1);
 }
 
-void displaydfuimage(void)
-{
-    displayclear();
-    epd_refresh_area(32, 142, gImage_dfu, 32, 24);
-    epd_refresh_area(66, 190, gImage_soterwallet, 130, 24);
-
-    // 顶高   54     左宽      190        显示长      130   显示行数   24
-    // epd_refresh_area(66, 190, gImage_soterwallet, 130, 24);
-    // epd_refresh_area(32, 190, logo_data, 125, 22);
-    
-    epd_part_update();
-}
-
-void displayclear(void)
-{
-    uint16_t i;
-    epd_wxx_hal_init();
-    epd_init_full();
-    //	epd_init_part();
-    for (i = 0; i < EPD_FULLBUF_SIZE; i++)
-        gImage_full[i] = 0xFF;
-    epd_refresh_full(gImage_full);
-    epd_init_part();
-    epd_refresh_partial(gImage_full);
-    // epd_part_update();
-}
-
 /**
  * @brief Function notifies certain events in DFU process.
  */
@@ -154,38 +120,25 @@ static void dfu_observer(nrf_dfu_evt_type_t evt_type)
         //bsp_board_led_on(BSP_BOARD_LED_1);
         nrf_bootloader_wdt_feed_timer_start(NRF_BOOTLOADER_MS_TO_TICKS(200), led_flash);
 
+        //NRF_POWER
+#ifndef NRF_DK
         nrf_gpio_cfg_output(ACC_POWER);
         nrf_gpio_pin_clear(ACC_POWER);
+#endif
         nrf_delay_ms(100);
+        display_init();
+        // displaydfuimage();
 
-        displaydfuimage();
-
-        // delay_t = 500;
-        // marquee();
-        //nrf_bootloader_wdt_feed_timer_start(NRF_BOOTLOADER_MS_TO_TICKS(200),
-        //                                    marquee);
-        //bsp_board_led_on(BSP_BOARD_LED_0);
-        //bsp_board_led_on(BSP_BOARD_LED_1);
-        //bsp_board_led_on(BSP_BOARD_LED_2);
-        //bsp_board_led_on(BSP_BOARD_LED_3);
-        //bsp_board_led_off(BSP_BOARD_LED_2);
         break;
     case NRF_DFU_EVT_TRANSPORT_ACTIVATED:
         /**< Transport activated (e.g. BLE connected, USB plugged in). */
         nrf_bootloader_wdt_feed_timer_start(NRF_BOOTLOADER_MS_TO_TICKS(400), led_flash);
-        // delay_t = 200;
-        // marquee();
-        //nrf_bootloader_wdt_feed_timer_start(NRF_BOOTLOADER_MS_TO_TICKS(400),
-        //                                    marquee);
-        //bsp_board_led_off(BSP_BOARD_LED_1);
-        //bsp_board_led_on(BSP_BOARD_LED_2);
+        
         break;
     case NRF_DFU_EVT_TRANSPORT_DEACTIVATED:
-        nrf_bootloader_wdt_feed_timer_start(NRF_BOOTLOADER_MS_TO_TICKS(200),
-                                            led_flash);
         /**< Transport deactivated (e.g. BLE disconnected, USB plugged out). */
-        // delay_t = 200;
-        // marquee();
+        nrf_bootloader_wdt_feed_timer_start(NRF_BOOTLOADER_MS_TO_TICKS(200), led_flash);
+
         break;
     case NRF_DFU_EVT_DFU_STARTED:
         break;
@@ -199,28 +152,28 @@ int main(void)
 {
     uint32_t ret_val;
 
-    //voltage_init();
+    voltage_init();
     bsp_board_init(BSP_INIT_LEDS);
     bsp_board_led_on(BSP_BOARD_LED_0);
     bsp_board_led_on(BSP_BOARD_LED_1);
 
 
-    if ((NRF_UICR->REGOUT0 & UICR_REGOUT0_VOUT_Msk) ==
-        (UICR_REGOUT0_VOUT_DEFAULT << UICR_REGOUT0_VOUT_Pos))
-    {
-        //NRF_LOG_INFO("UICR_REGOUT0 config");
-        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen;
-        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+    //if ((NRF_UICR->REGOUT0 & UICR_REGOUT0_VOUT_Msk) ==
+    //   (UICR_REGOUT0_VOUT_DEFAULT << UICR_REGOUT0_VOUT_Pos))
+    //{
+    //   //NRF_LOG_INFO("UICR_REGOUT0 config");
+    //   NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen;
+    //   while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
 
-        NRF_UICR->REGOUT0 = (NRF_UICR->REGOUT0 & ~((uint32_t)UICR_REGOUT0_VOUT_Msk)) |
-                            (UICR_REGOUT0_VOUT_2V7 << UICR_REGOUT0_VOUT_Pos);
+    //   NRF_UICR->REGOUT0 = (NRF_UICR->REGOUT0 & ~((uint32_t)UICR_REGOUT0_VOUT_Msk)) |
+    //                       (UICR_REGOUT0_VOUT_3V3 << UICR_REGOUT0_VOUT_Pos);
 
-        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren;
-        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+    //   NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren;
+    //   while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
 
-        // System reset is needed to update UICR registers.
-        NVIC_SystemReset();
-    }
+    //   // System reset is needed to update UICR registers.
+    //   NVIC_SystemReset();
+    //}
 
     // Protect MBR and bootloader code from being overwritten.
     ret_val = nrf_bootloader_flash_protect(0, MBR_SIZE, false);
@@ -234,13 +187,6 @@ int main(void)
     NRF_LOG_INFO("Inside bootloader main");
     UNUSED_RETURN_VALUE(NRF_LOG_PROCESS());
 
-    
-    //sd_power_gpregret_clr(0,0xffffffff);
-
-    // epd_wxx_hal_init();
-    // epd_init_full();
-    // epd_refresh_full(gImage_dfu);
-
     ret_val = nrf_bootloader_init(dfu_observer);
     APP_ERROR_CHECK(ret_val);
 
@@ -248,8 +194,6 @@ int main(void)
     // no ongoing DFU operation and found a valid main application.
     // Boot the main application.
     nrf_bootloader_app_start();
-
-    // led_flash();
 
     // Should never be reached.
     NRF_LOG_INFO("After bootloader main");

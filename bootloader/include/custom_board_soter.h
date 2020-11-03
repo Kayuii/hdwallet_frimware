@@ -31,12 +31,12 @@ extern "C" {
 //Display
 #define EPD_W21_C02 1
 
-#define EPD_Wxx_MOSI_PIN NRF_GPIO_PIN_MAP(0, 12)
-#define EPD_Wxx_CLK_PIN NRF_GPIO_PIN_MAP(1, 9)
-#define EPD_Wxx_CS_PIN NRF_GPIO_PIN_MAP(0, 8)
-#define EPD_Wxx_DC_PIN NRF_GPIO_PIN_MAP(0, 13)
-#define EPD_Wxx_RST_PIN NRF_GPIO_PIN_MAP(0, 15)
-#define EPD_Wxx_BS_PIN NRF_GPIO_PIN_MAP(0, 17)
+#define EPD_Wxx_MOSI_PIN    NRF_GPIO_PIN_MAP(0, 12)
+#define EPD_Wxx_CLK_PIN     NRF_GPIO_PIN_MAP(1, 9)
+#define EPD_Wxx_CS_PIN      NRF_GPIO_PIN_MAP(0, 8)
+#define EPD_Wxx_DC_PIN      NRF_GPIO_PIN_MAP(0, 13)
+#define EPD_Wxx_RST_PIN     NRF_GPIO_PIN_MAP(0, 15)
+#define EPD_Wxx_BS_PIN      NRF_GPIO_PIN_MAP(0, 17)
 
 //ADC
 #define ADC_CHN_BATTERY 7

@@ -43,7 +43,6 @@
 #ifndef SDK_CONFIG_DEBUG_H
 #define SDK_CONFIG_DEBUG_H
 // <<< Use Configuration Wizard in Context Menu >>>\n
-
 // <h> nRF_Bootloader 
 
 //==========================================================

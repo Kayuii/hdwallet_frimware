@@ -313,7 +313,7 @@ int main(void) {
     usb_init();
     soter_ble_init((char *)g_product_id);
 
-    nrf_delay_ms(10000);
+    // nrf_delay_ms(10000);
     
     // Activate deep sleep mode.
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;

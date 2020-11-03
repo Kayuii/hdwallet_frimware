@@ -18,7 +18,7 @@
 
 #define ALLSCREEN_GRAGHBYTES 4000
 
-#define DOT_WHITE_VALUE		1
+#define DOT_WHITE_VALUE		0
 
 void epd_init_full(void);
 void epd_refresh_full(const unsigned char* data);
